@@ -1,6 +1,9 @@
 # msi-ectl
 MSI Embedded Controller Control Center for Linux-based systems
 
+***CRITICAL: This project is still being actively maintained and audited for software bugs***
+***It has not been proven to be stable across most Linux distributions yet***
+
 msi-ectl is a CLI-based shell script that allows users to control 
 the MSI Embedded Controller on Linux systems.
 
