@@ -30,4 +30,5 @@ preview_files(){
 			echo "$(basename "$file"): $(cat "$file")\n"
 		fi
 	done
+
 } # added these comments
