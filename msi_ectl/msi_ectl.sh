@@ -22,9 +22,14 @@ install_prompt(){
 	return 0
 }
 
+# Bringing in the install.sh functions
+# It is brought in before loading the msi_ec module so the install functions are available incase of a failure
 . "$SCRIPT_DIR/install.sh"
+
+# Loading the msi-ec module
 modprobe msi_ec
 
+# Checks whether or not it has failed to load the module
 if [ "$?" -ne 0 ]; then
 	install_prompt
 	if [ "$?" -ne 0 ]; then
@@ -34,11 +39,12 @@ if [ "$?" -ne 0 ]; then
 	echo "Successfully installed msi-ec"
 fi
 
+# Bringing in the control.sh functions
 . "$SCRIPT_DIR/control.sh"
 
 
 
-echo "welcome to the linux msi center"
+echo "Welcome to msi_ectl"
 
 echo "msi module: "
 read MODULE_FLAG
@@ -55,9 +61,3 @@ read PREVIEW_FLAG
 if [ "$PREVIEW_FLAG" -eq "1" ]; then
 	preview_files
 fi
-
-
-
-
-
-echo "that's it for now, thanks for visting!!!"
