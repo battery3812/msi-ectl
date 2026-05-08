@@ -5,7 +5,7 @@ PREVIEW_FLAG=0
 # on/off and then asks them whether they want to turn it on (1) or turn it off (0)
 userload(){
 	# Iterates over the msi-ec directory
-	for file in /sys/devices/platform/msi-ec/*; do
+	for file in "$MSI_DIR"/*; do
 		# Checks if we are iterating over a file
 		if [ -f "$file" ]; then
 			STATE=$(cat "$file")
@@ -23,7 +23,7 @@ userload(){
 }
 preview_files(){
 	# Iterates over the msi-ec directory
-	for file in /sys/devices/platform/msi-ec/*; do
+	for file in "$MSI_DIR"/*; do
 		# Checks if we are iterating over a file
 		if [ -f "$file" ]; then
 			# Printing out the filename and the current state

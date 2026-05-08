@@ -3,6 +3,7 @@
 
 
 SCRIPT_DIR=$(dirname "$0")
+MSI_DIR="/sys/devices/platform/msi-ec"
 MODULE_FLAG=0
 INSTALL_CHECK=0
 
@@ -23,7 +24,6 @@ install_prompt(){
 }
 
 # Bringing in the install.sh functions
-# It is brought in before loading the msi_ec module so the install functions are available incase of a failure
 . "$SCRIPT_DIR/install.sh"
 
 # Loading the msi-ec module
@@ -31,12 +31,17 @@ modprobe msi_ec
 
 # Checks whether or not it has failed to load the module
 if [ "$?" -ne 0 ]; then
-	install_prompt
-	if [ "$?" -ne 0 ]; then
-		echo "Installation did not happen, use of this script is to be avoided until the module is installed"
-		exit
+	# If the MSI-EC directory exists, then assume the user is testing and continue
+	if [ -d "$MSI_DIR" ]; then
+		echo "Testing/Debug mode"
+	else
+		install_prompt
+		if [ "$?" -ne 0 ]; then
+			echo "Installation did not happen, use of this script is to be avoided until installed."
+			exit 1
+		fi
+		echo "Sucessfully installed MSI-EC"
 	fi
-	echo "Successfully installed msi-ec"
 fi
 
 # Bringing in the control.sh functions
