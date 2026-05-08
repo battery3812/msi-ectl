@@ -33,5 +33,19 @@ the msi-ec kernel module
 # Usage
 sudo ./msi-ectl.sh
 
+# Testing
+
+While I was making this project, I've realized that testing may be more complicated than ordinary
+projects, because this script relies on MSI-EC, which requires MSI hardware. So I've added 
+a variable "MSI_DIR" that represents where the MSI-EC module directory should be. This variable can
+be changed to a directory pretending to be the MSI-EC module directory to make testing on non-MSI
+hardware somewhat possible. However, testing on real MSI hardware is always better than mock-testing.
+
+*The mock-testing approach tests the functionality of the script rather than that of the MSI-EC module.*
+
+As of right now, the priority testing distributions are **those new Linux users are most likely to
+move to (beginner distributions).**
+
 # License
 GNU General Public License v2.0
+
