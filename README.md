@@ -25,6 +25,8 @@ the msi-ec kernel module
 
 # Requirements
 - msi-ec kernel module
+
+In order to **install the msi-ec module** below are the requirements:
 - git
 - make
 - dkms (optional but recommended)
