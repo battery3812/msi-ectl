@@ -1,6 +1,9 @@
 #!/bin/sh
 
-
+if [ "$(id -u)" -ne 0 ]; then
+	echo "You must run the script as root"
+	exit 1
+fi
 
 SCRIPT_DIR=$(dirname "$0")
 MSI_DIR="/sys/devices/platform/msi-ec"
