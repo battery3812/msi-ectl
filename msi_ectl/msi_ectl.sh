@@ -9,37 +9,13 @@ SCRIPT_DIR=$(dirname "$0")
 MODULE_FLAG=0
 INSTALL_CHECK=0
 
-install_prompt(){
-	echo "msi-ec may not be installed, install? (Y\n)"
-	read INSTALL_CHECK
-
-	if [ "$INSTALL_CHECK" = "n" ] || [ "$INSTALL_CHECK" = "N" ]; then
-		return 1
-	fi
-
-	install_module
-	if [ "$?" -ne 0 ]; then
-		return 1
-	fi
-
-	return 0
-}
-
-# Bringing in the install.sh functions
-# It is brought in before loading the msi_ec module so the install functions are available incase of a failure
-. "$SCRIPT_DIR/install.sh"
-
 # Loading the msi-ec module
 modprobe msi_ec
 
 # Checks whether or not it has failed to load the module
 if [ "$?" -ne 0 ]; then
-	install_prompt
-	if [ "$?" -ne 0 ]; then
-		echo "Installation did not happen, use of this script is to be avoided until the module is installed"
-		exit
-	fi
-	echo "Successfully installed msi-ec"
+	echo "Failed to load msi-ec module, it may not be installed on your system"
+	exit 1
 fi
 
 # Bringing in the control.sh functions
